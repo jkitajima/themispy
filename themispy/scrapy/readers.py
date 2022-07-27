@@ -8,6 +8,7 @@ def read_jsonl(dir: str = 'temp/', attr: str = 'url', encoding: str = 'utf-8') -
     dir = build_path(dir)
     attr = f'"{attr}"'
     attr_len = len(attr)
+    datasources = []
     
     with os.scandir(dir) as entries:
         for entry in entries:
@@ -19,4 +20,6 @@ def read_jsonl(dir: str = 'temp/', attr: str = 'url', encoding: str = 'utf-8') -
                         line = line[idx+attr_len+3:]
                         idx = line.find(r'"')
                         line = line[:idx]
-                        return line
+                        datasources.append(line)
+                        
+    return datasources

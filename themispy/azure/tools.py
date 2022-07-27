@@ -17,7 +17,7 @@ def get_connection_string() -> str:
 # Uploading files to blob storage    
 def upload(container: str, src: os.path = 'temp/',
            overwrite: bool = True, remove_files: bool = True,
-           log_data: bool = True) -> None:
+           log_data: bool = False) -> None:
     """
     Upload data to Azure blob storage.
     Enter container path, e.g.: 'mycontainer/mysubcontainer'.
