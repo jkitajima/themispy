@@ -15,3 +15,14 @@ def get_connection_string() -> str:
 INGESTION_PATH = PROJECT_PATH.partition('/mining/')[2] \
     + datetime.datetime.now().strftime('/%Y/%m/%d')
 INGESTION_PATH = f"ingestion/{INGESTION_PATH}"
+
+
+def get_container_logpath() -> str:
+    """
+    This return the current date formatted for logging directories.
+    e.g.: my_container_fullpath = 'ingestion/dir/subdir' \ \n
+    \+ f"{get_container_logpath()}" \n
+    print(my_container_fullpath) will return:
+    * 'ingestion/dir/subdir/THIS_YEAR/THIS_MONTH/THIS_DAY'
+    """
+    return datetime.datetime.now().strftime('/%Y/%m/%d')

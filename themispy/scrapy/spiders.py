@@ -15,7 +15,7 @@ DEFAULT_SETTINGS = {
 }
 
 
-def run_spider(spider: Spider, pipeline: str,
+def run_spider(spider: Spider, pipeline: str = None,
                settings: dict = None, override: bool = False) -> None:
     """
     Process for running spiders.
@@ -25,9 +25,9 @@ def run_spider(spider: Spider, pipeline: str,
     * 'pipeline': Must be either 'blob' or 'download'.
     * 'settings': Scrapy Settings object.
     * 'override': If set to 'True', the settings passed will
-    override all default settings.
+    override all previous settings.
     """
-    if pipeline != 'blob' and pipeline !='download':
+    if pipeline is not None and pipeline != 'blob' and pipeline !='download':
         raise Exception("Pipeline must be either 'blob' or 'download'.")
     
     # Configure Scrapy Project Settings
