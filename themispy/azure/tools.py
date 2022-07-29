@@ -14,3 +14,4 @@ def get_connection_string() -> str:
 # Azure Storage Ingestion Relative Path
 INGESTION_PATH = PROJECT_PATH.partition('/mining/')[2] \
     + datetime.datetime.now().strftime('/%Y/%m/%d')
+INGESTION_PATH = f"ingestion/{INGESTION_PATH}"

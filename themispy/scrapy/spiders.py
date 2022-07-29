@@ -11,7 +11,7 @@ from twisted.internet import reactor
 DEFAULT_SETTINGS = {
     'ROBOTSTXT_OBEY': False,
     'DEFAULT_REQUEST_HEADERS': {'Accept-Language': 'pt-BR'},
-    'FILES_STORE': 'Themis Project'
+    'FILES_STORE': 'themis'
 }
 
 
@@ -27,7 +27,7 @@ def run_spider(spider: Spider, pipeline: str,
     * 'override': If set to 'True', the settings passed will
     override all default settings.
     """
-    if pipeline != 'blob' and pipeline !='upload':
+    if pipeline != 'blob' and pipeline !='download':
         raise Exception("Pipeline must be either 'blob' or 'download'.")
     
     # Configure Scrapy Project Settings
@@ -35,9 +35,13 @@ def run_spider(spider: Spider, pipeline: str,
     scrapy_settings.update(DEFAULT_SETTINGS)
     
     if pipeline == 'blob':
-        scrapy_settings.update({'ITEM_PIPELINES': {'scrapy.pipelines.BlobUploadPipeline': 1}})
+        scrapy_settings.update({
+            'ITEM_PIPELINES': {'scraping.scraping.pipelines.BlobUploadPipeline': 1}
+        })
     else:
-        scrapy_settings.update({'ITEM_PIPELINES': {'scrapy.pipelines.FileDownloaderPipeline': 1}})
+        scrapy_settings.update({
+            'ITEM_PIPELINES': {'scraping.scraping.pipelines.FileDownloaderPipeline': 1}
+        })
     
     if settings is not None:
         if override:
