@@ -6,12 +6,9 @@ import scrapy
 
 class FileDownloader(scrapy.Item):
     """
-    Attributes are:
-    * 'file_urls': stores the urls used for downloading files. Do not rename this.
-    * 'docname': document name.
-    * 'docext': document extension. (e.g.: .csv, .xml, .zip)
-    """
+    Scrapy Item Class defined for downloading files.
     
-    file_urls = scrapy.Field()
-    docname = scrapy.Field()
-    docext = scrapy.Field()
+    The only attribute is:
+    * 'file_urls': stores the urls used for downloading files. Do not rename this.
+    """
+    file_urls = scrapy.Field() # Do not rename this

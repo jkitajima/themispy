@@ -1,25 +1,30 @@
-import os
+from azure.storage.blob import ContainerClient
 
-from themispy.project.utils import build_path
+from themispy.azure.tools import get_connection_string, INGESTION_PATH
+from themispy.project.utils import PROJECT_TITLE
 
 
-def read_jsonl(dir: str = 'temp/', attr: str = 'url', encoding: str = 'utf-8') -> 'list[str]':
-    """Reads all JSON Lines datasources from the specified directory."""
-    dir = build_path(dir)
-    attr = f'"{attr}"'
-    attr_len = len(attr)
-    datasources = []
+def read_jsonl(container: str = INGESTION_PATH,
+               attr: str = 'url',
+               encoding: str = 'UTF-8') -> 'list[str]':
+    """Reads all JSON Lines datasources from the specified container."""
+    attr = f'"{attr}": "'
     
-    with os.scandir(dir) as entries:
-        for entry in entries:
-            if entry.is_file() and not entry.name.startswith('.') \
-            and not entry.name.lower() == 'readme.md':
-                with open(entry, encoding=encoding) as file:
-                    for line in file:
-                        idx = line.find(attr)
-                        line = line[idx+attr_len+3:]
-                        idx = line.find(r'"')
-                        line = line[:idx]
-                        datasources.append(line)
-                        
+    container_client = ContainerClient.from_connection_string(
+        conn_str=get_connection_string(),
+        container_name=container
+    )
+    
+    stream = container_client.download_blob(f"{PROJECT_TITLE}_crawler.jsonl")
+    content, datasources = [], []
+    
+    for i in stream.content_as_text(encoding=encoding).split(attr):
+        if i.startswith('http'):
+            content.append(i)
+        
+    for i in content:
+        idx = i.find('"')
+        i = i[:idx]
+        datasources.append(i)
+    
     return datasources

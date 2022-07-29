@@ -6,54 +6,43 @@ from scrapy.utils.log import configure_logging
 from scrapy.utils.project import get_project_settings
 from twisted.internet import reactor
 
-from themispy.project.utils import PROJECT_PATH, PROJECT_TITLE, build_path
-
 
 # Default Scrapy Settings
 DEFAULT_SETTINGS = {
     'ROBOTSTXT_OBEY': False,
     'DEFAULT_REQUEST_HEADERS': {'Accept-Language': 'pt-BR'},
-    'ITEM_PIPELINES': {'scraping.scraping.pipelines.FileDownloaderPipeline': 1},
-    'FILES_STORE': build_path('temp/')
+    'FILES_STORE': 'Themis Project'
 }
 
 
-def run_spider(spider: Spider, filename: str = '', settings: dict = None,
-               override: bool = False, crawler: bool = False,
-               format: str = 'jsonlines', encoding: str = 'utf8',
-               overwrite: bool = True) -> None:
-    """Process for running spiders."""
+def run_spider(spider: Spider, pipeline: str,
+               settings: dict = None, override: bool = False) -> None:
+    """
+    Process for running spiders.
+    
+    Attributes are:
+    * 'spider': Spider Class used for crawling.
+    * 'pipeline': Must be either 'blob' or 'download'.
+    * 'settings': Scrapy Settings object.
+    * 'override': If set to 'True', the settings passed will
+    override all default settings.
+    """
+    if pipeline != 'blob' and pipeline !='upload':
+        raise Exception("Pipeline must be either 'blob' or 'download'.")
     
     # Configure Scrapy Project Settings
     scrapy_settings = get_project_settings()
     scrapy_settings.update(DEFAULT_SETTINGS)
     
-    if filename != '':
-        scrapy_settings.update({
-            'FEEDS': {
-                f"{PROJECT_PATH}/temp/{PROJECT_TITLE}_{filename}": {
-                    'format': format,
-                    'encoding': encoding,
-                    'overwrite': overwrite
-                }
-            }
-        })
-        
-    scrapy_settings.update(settings)
+    if pipeline == 'blob':
+        scrapy_settings.update({'ITEM_PIPELINES': {'scrapy.pipelines.BlobUploadPipeline': 1}})
+    else:
+        scrapy_settings.update({'ITEM_PIPELINES': {'scrapy.pipelines.FileDownloaderPipeline': 1}})
     
-    if crawler:
-        scrapy_settings.update({
-            'FEEDS': {
-                f"{PROJECT_PATH}/temp/{PROJECT_TITLE}_crawler.jsonl": {
-                    'format': 'jsonlines',
-                    'encoding': 'utf8',
-                    'overwrite': False
-                }
-            }
-        })
+    if settings is not None:
+        if override:
+            scrapy_settings = get_project_settings()
         
-    if override and settings is not None:
-        scrapy_settings = get_project_settings()
         scrapy_settings.update(settings)
     
     
