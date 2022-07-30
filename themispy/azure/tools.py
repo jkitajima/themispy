@@ -1,6 +1,7 @@
 import datetime
 import json
 
+import pytz
 from themispy.project.utils import PROJECT_PATH, build_path
 
 
@@ -25,4 +26,5 @@ def get_container_logpath() -> str:
     print(my_container_fullpath) will return:
     * 'ingestion/dir/subdir/THIS_YEAR/THIS_MONTH/THIS_DAY'
     """
-    return datetime.datetime.now().strftime('/%Y/%m/%d')
+    sp = pytz.timezone('America/Sao_Paulo')
+    return datetime.datetime.now(tz=sp).strftime('/%Y/%m/%d')
