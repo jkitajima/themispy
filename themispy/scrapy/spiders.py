@@ -7,14 +7,6 @@ from scrapy.utils.project import get_project_settings
 from twisted.internet import reactor
 
 
-# Default Scrapy Settings
-DEFAULT_SETTINGS = {
-    'ROBOTSTXT_OBEY': False,
-    'DEFAULT_REQUEST_HEADERS': {'Accept-Language': 'pt-BR'},
-    'FILES_STORE': 'themis'
-}
-
-
 def run_spider(spider: Spider, pipeline: str = None,
                settings: dict = None, override: bool = False) -> None:
     """
@@ -32,13 +24,12 @@ def run_spider(spider: Spider, pipeline: str = None,
     
     # Configure Scrapy Project Settings
     scrapy_settings = get_project_settings()
-    scrapy_settings.update(DEFAULT_SETTINGS)
     
     if pipeline == 'blob':
         scrapy_settings.update({
             'ITEM_PIPELINES': {'scraping.scraping.pipelines.BlobUploadPipeline': 1}
         })
-    else:
+    elif pipeline == 'download':
         scrapy_settings.update({
             'ITEM_PIPELINES': {'scraping.scraping.pipelines.FileDownloaderPipeline': 1}
         })
