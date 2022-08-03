@@ -1,4 +1,7 @@
+import datetime
 import os
+
+import pytz
 
 
 # Pathlike object of current project
@@ -31,3 +34,18 @@ def split_filepath(path: str) -> 'tuple[str, str]':
     path, docext = os.path.splitext(path)
     _, docname = os.path.split(path)
     return docname, docext
+
+
+def get_logpath(tz: str = 'America/Sao_Paulo') -> str:
+    """
+    This return the current date formatted for logging directories.
+    e.g.: my_container_fullpath = 'ingestion/dir/subdir' \ \n
+    \+ f"{get_container_logpath()}" \n
+    print(my_container_fullpath) will return:
+    * 'ingestion/dir/subdir/THIS_YEAR/THIS_MONTH/THIS_DAY'.\n
+    
+    :param str: timezone\n
+    Default timezone is 'America/Sao_Paulo'.
+    """
+    tz = pytz.timezone(tz)
+    return datetime.datetime.now(tz=tz).strftime('/%Y/%m/%d')
