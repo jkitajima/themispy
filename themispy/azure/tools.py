@@ -1,7 +1,6 @@
 import datetime
 import json
 
-import pytz
 from themispy.project.utils import PROJECT_PATH, build_path
 
 
@@ -13,18 +12,11 @@ def get_connection_string() -> str:
 
 
 # Azure Storage Ingestion Relative Path
-INGESTION_PATH = PROJECT_PATH.partition('/mining/')[2] \
-    + datetime.datetime.now().strftime('/%Y/%m/%d')
-INGESTION_PATH = f"ingestion/{INGESTION_PATH}"
+def build_ingestion_path(base_container: str = 'ingestion',
+                         dir_partition: str = '/mining/') -> str:
+    INGESTION_PATH = PROJECT_PATH.partition(dir_partition)[2] \
+        + datetime.datetime.now().strftime('/%Y/%m/%d')
+    INGESTION_PATH = f"{base_container}/{INGESTION_PATH}"
+    return INGESTION_PATH
 
-
-def get_container_logpath() -> str:
-    """
-    This return the current date formatted for logging directories.
-    e.g.: my_container_fullpath = 'ingestion/dir/subdir' \ \n
-    \+ f"{get_container_logpath()}" \n
-    print(my_container_fullpath) will return:
-    * 'ingestion/dir/subdir/THIS_YEAR/THIS_MONTH/THIS_DAY'
-    """
-    sp = pytz.timezone('America/Sao_Paulo')
-    return datetime.datetime.now(tz=sp).strftime('/%Y/%m/%d')
+INGESTION_PATH = build_ingestion_path()
