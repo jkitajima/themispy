@@ -22,7 +22,7 @@ def build_path(path: str) -> str:
     return os.path.join(PROJECT_PATH, path)
 
 
-def split_filepath(path: str) -> 'tuple[str, str]':
+def split_ospath(path: str) -> 'tuple[str, str]':
     """
     Pass a pathlike object or filename to split
     the filename and the file extension.
@@ -33,6 +33,16 @@ def split_filepath(path: str) -> 'tuple[str, str]':
     """
     path, docext = os.path.splitext(path)
     _, docname = os.path.split(path)
+    return docname, docext
+
+
+# Get Doc Name and Doc Extension        
+def split_filepath(url: str) -> 'tuple[str, str]':
+    idx = url.rfind('.')
+    docname = url[:idx]
+    docext = url[idx:]
+    idx = docname.rfind('/')
+    docname = docname[idx+1:]
     return docname, docext
 
 

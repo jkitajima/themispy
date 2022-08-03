@@ -11,7 +11,7 @@ from scrapy.pipelines.files import FilesPipeline
 from scrapy.utils.misc import md5sum
 
 from themispy.azure.tools import get_connection_string, INGESTION_PATH
-from themispy.project.utils import split_filepath
+from themispy.project.utils import split_filepath, get_logpath
   
 
 class BlobUploadPipeline:
@@ -24,7 +24,7 @@ class BlobUploadPipeline:
     def open_spider(self, spider):
         self.container_client = ContainerClient.from_connection_string(
             conn_str=get_connection_string(),
-            container_name=INGESTION_PATH
+            container_name=INGESTION_PATH + get_logpath()
         )
         
         self.blob_client = self.container_client.get_blob_client(f"{spider.name}.jsonl")
@@ -55,7 +55,7 @@ class FileDownloaderPipeline(FilesPipeline):
         docname, docext = split_filepath(response.url)
         
         self.blob_client = self.blob_service.get_blob_client(
-            container=INGESTION_PATH,
+            container=INGESTION_PATH + get_logpath(),
             blob=f"{docname}{docext}"
         )
         

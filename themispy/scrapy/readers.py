@@ -1,13 +1,9 @@
 from azure.storage.blob import BlobClient
 
-from themispy.azure.tools import get_connection_string, INGESTION_PATH
-from themispy.project.utils import PROJECT_TITLE
 
-
-def read_jsonl(blob_name: str = f"{PROJECT_TITLE}_crawler.jsonl",
-               conn_str: str = get_connection_string(),
-               container: str = INGESTION_PATH, attr: str = 'url',
-               encoding: str = 'UTF-8', startswith: str = 'http') -> 'list[str]':
+def read_jsonl(blob_name: str, conn_str: str, container: str,
+               attr: str = 'url', encoding: str = 'UTF-8',
+               startswith: str = 'http') -> 'list[str]':
     """Reads all JSON Lines datasources from the specified blob and container."""
     attr = f'"{attr}": "'
     
