@@ -5,20 +5,21 @@
 import json
 from io import BytesIO
 
-from azure.storage.blob import ContainerClient
+from azure.storage.blob import BlobServiceClient, ContainerClient
 from itemadapter import ItemAdapter
 from scrapy.pipelines.files import FilesPipeline
 from scrapy.utils.misc import md5sum
 
 from themispy.azure.tools import get_connection_string, INGESTION_PATH
-from themispy.project.utils import PROJECT_TITLE, split_filepath
+from themispy.project.utils import split_filepath
   
 
 class BlobUploadPipeline:
     """
     Custom class created in order to upload blobs to Azure Storage.
-    The connection to Azure Storage is made during the 'process_item'
-    method in the Item Pipeline phase.
+    The connection to Azure Storage is made during the 'open_spider'
+    method and the blob upload is made during the
+    'process_item' method in the Item Pipeline.
     """
     def open_spider(self, spider):
         self.container_client = ContainerClient.from_connection_string(
@@ -34,7 +35,7 @@ class BlobUploadPipeline:
         self.blob_client.upload_blob(data=line, blob_type='AppendBlob')
         return item
 
-    
+
 class FileDownloaderPipeline(FilesPipeline):
     """
     Custom class created in order to upload downloaded files to Azure Storage.
@@ -47,14 +48,18 @@ class FileDownloaderPipeline(FilesPipeline):
         checksum = md5sum(buf)
         buf.seek(0)
         
-        # Azure Container Client
-        container_client = ContainerClient.from_connection_string(
-            conn_str=get_connection_string(),
-            container_name=INGESTION_PATH
+        # Opening an Azure Blob Service Client
+        self.blob_service = BlobServiceClient.from_connection_string(
+            conn_str=get_connection_string())
+        
+        docname, docext = split_filepath(response.url)
+        
+        self.blob_client = self.blob_service.get_blob_client(
+            container=INGESTION_PATH,
+            blob=f"{docname}{docext}"
         )
         
-        # Blob Upload
-        docname, docext = split_filepath(response.url)
-        blob_client = container_client.get_blob_client(f"{PROJECT_TITLE}_{docname}{docext}")
-        blob_client.upload_blob(data=buf)
+        # Uploading Blob
+        self.blob_client.upload_blob(data=buf, overwrite=True)
+        self.store.persist_file(path, buf, info)
         return checksum
