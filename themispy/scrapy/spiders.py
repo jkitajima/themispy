@@ -31,11 +31,11 @@ def run_spider(spider: Spider, pipeline: str = None,
     
     if pipeline == 'blob':
         scrapy_settings.update({
-            'ITEM_PIPELINES': {f'{project_name}.{project_name}.pipelines.BlobUploadPipeline': 1}
+            'ITEM_PIPELINES': {f'{project_name}.{project_name}.pipelines.AzureBlobUploadPipeline': 1}
         })
     elif pipeline == 'download':
         scrapy_settings.update({
-            'ITEM_PIPELINES': {f'{project_name}.{project_name}.pipelines.FileDownloaderPipeline': 1},
+            'ITEM_PIPELINES': {f'{project_name}.{project_name}.pipelines.AzureFileDownloaderPipeline': 1},
             'FILES_STORE': 'Khipo-Themis_Project',
             'FILES_EXPIRES': 0
         })
