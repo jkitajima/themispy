@@ -46,7 +46,7 @@ def run_spider(spider: Spider, pipeline: str = None,
         
         scrapy_settings.update(settings)
         
-    print(f"FINAL SCRAPY SETTINGS:\n{scrapy_settings.copy_to_dict()}")
+    print(f"[SCRAPY SETTINGS]\n{scrapy_settings.copy_to_dict()}")
     
     
     def multiprocess(queue: Queue) -> None:
