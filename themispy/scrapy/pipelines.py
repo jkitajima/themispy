@@ -7,12 +7,12 @@ import json
 import os
 from io import BytesIO
 
-from azure.storage.blob import BlobClient
+from azure.storage.blob import ContainerClient, BlobClient
 from itemadapter import ItemAdapter
 from scrapy.pipelines.files import FilesPipeline
 from scrapy.utils.misc import md5sum
 
-from themispy.project.utils import split_filepath
+from themispy.project.utils import get_logpath, split_filepath
 
 
 class AzureBlobUploadPipeline:
@@ -51,6 +51,15 @@ class AzureFileDownloaderPipeline(FilesPipeline):
     files locally, you still must pass a 'FILES_STORE' value to your
     spider settings.
     """
+    def open_spider(self, spider):
+        self.spiderinfo = self.SpiderInfo(spider)
+        
+        self.container_client = ContainerClient.from_connection_string(
+            conn_str=os.environ['AzureWebJobsStorage'],
+            container_name=os.environ['AZCONTAINER_PATH'],
+            logging_enable=True)
+        
+    
     def file_downloaded(self, response, request, info, *, item=None):
         # path = self.file_path(request, response=response, info=info, item=item)
         buf = BytesIO(response.body)
@@ -58,14 +67,17 @@ class AzureFileDownloaderPipeline(FilesPipeline):
         buf.seek(0)
         
         
-        # Azure Integration
+        # Naming Settings
+        
+        # os.path.split(cont_path.strip(get_logpath()))[-1]
+        PROJECT_TITLE = os.path.split(
+            os.environ['AZCONTAINER_PATH'].strip(get_logpath()))[-1]
+        
         docname, docext = split_filepath(response.url)
         
-        self.blob_client = BlobClient.from_connection_string(
-            conn_str=os.environ['AzureWebJobsStorage'],
-            container_name=os.environ['AZCONTAINER_PATH'],
-            blob_name=f"{docname}{docext}",
-            logging_enable=True)
+        # Azure Integration
+        self.blob_client = self.container_client.get_blob_client(
+            blob=f"{PROJECT_TITLE}_{docname}{docext}")
         
         self.blob_client.upload_blob(data=buf, overwrite=True)
         
