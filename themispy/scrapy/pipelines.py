@@ -25,6 +25,7 @@ class AzureBlobUploadPipeline:
     is retrieved from "AZCONTAINER_PATH" environment variable.
     """
     def open_spider(self, spider):
+        print(f"Opening Blob Client@Container<'{os.environ['AZCONTAINER_PATH']}'>.")
         self.blob_client = BlobClient.from_connection_string(
             conn_str=os.environ['AzureWebJobsStorage'],
             container_name=os.environ['AZCONTAINER_PATH'],
@@ -54,6 +55,7 @@ class AzureFileDownloaderPipeline(FilesPipeline):
     def open_spider(self, spider):
         self.spiderinfo = self.SpiderInfo(spider)
         
+        print(f"Opening Container Client@<'{os.environ['AZCONTAINER_PATH']}'>.")
         self.container_client = ContainerClient.from_connection_string(
             conn_str=os.environ['AzureWebJobsStorage'],
             container_name=os.environ['AZCONTAINER_PATH'],
@@ -61,15 +63,13 @@ class AzureFileDownloaderPipeline(FilesPipeline):
         
     
     def file_downloaded(self, response, request, info, *, item=None):
-        # path = self.file_path(request, response=response, info=info, item=item)
+        path = self.file_path(request, response=response, info=info, item=item)
         buf = BytesIO(response.body)
         checksum = md5sum(buf)
         buf.seek(0)
         
         
         # Naming Settings
-        
-        # os.path.split(cont_path.strip(get_logpath()))[-1]
         PROJECT_TITLE = os.path.split(
             os.environ['AZCONTAINER_PATH'].strip(get_logpath()))[-1]
         
@@ -82,5 +82,5 @@ class AzureFileDownloaderPipeline(FilesPipeline):
         self.blob_client.upload_blob(data=buf, overwrite=True, logging_enable=True)
         
         
-        # self.store.persist_file(path, buf, info)
+        self.store.persist_file(path, buf, info)
         return checksum
