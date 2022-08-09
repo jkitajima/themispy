@@ -8,8 +8,7 @@ from twisted.internet import reactor
 
 
 def run_spider(spider: Spider, pipeline: str = None,
-               settings: dict = None, override: bool = False,
-               project_name: str = 'scraping') -> None:
+               settings: dict = None, override: bool = False) -> None:
     """
     Process for running spiders.
     
@@ -29,15 +28,21 @@ def run_spider(spider: Spider, pipeline: str = None,
     # Configure Scrapy Project Settings
     scrapy_settings = get_project_settings()
     
+    DEFAULT_SETTINGS = {
+        'FILES_STORE': 'Khipo-Themis_Project',
+        'FILES_EXPIRES': 0,
+        'DOWNLOAD_TIMEOUT': 300
+    }
+    
+    scrapy_settings.update(DEFAULT_SETTINGS)
+    
     if pipeline == 'blob':
         scrapy_settings.update({
-            'ITEM_PIPELINES': {f'{project_name}.{project_name}.pipelines.AzureBlobUploadPipeline': 1}
+            'ITEM_PIPELINES': {f'themispy.scrapy.pipelines.AzureBlobUploadPipeline': 1}
         })
     elif pipeline == 'download':
         scrapy_settings.update({
-            'ITEM_PIPELINES': {f'{project_name}.{project_name}.pipelines.AzureFileDownloaderPipeline': 1},
-            'FILES_STORE': 'Khipo-Themis_Project',
-            'FILES_EXPIRES': 0
+            'ITEM_PIPELINES': {f'themispy.scrapy.pipelines.AzureFileDownloaderPipeline': 1}
         })
     
     if settings is not None:
