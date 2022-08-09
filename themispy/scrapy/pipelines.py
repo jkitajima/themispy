@@ -79,7 +79,7 @@ class AzureFileDownloaderPipeline(FilesPipeline):
         self.blob_client = self.container_client.get_blob_client(
             blob=f"{PROJECT_TITLE}_{docname}{docext}")
         
-        self.blob_client.upload_blob(data=buf, overwrite=True)
+        self.blob_client.upload_blob(data=buf, overwrite=True, logging_enable=True)
         
         
         # self.store.persist_file(path, buf, info)
