@@ -26,6 +26,7 @@ def run_spider(spider: Spider, pipeline: str = None,
     scrapy_settings = get_project_settings()
     
     DEFAULT_SETTINGS = {
+        'Accept-Language': 'pt-BR',
         'FILES_STORE': 'Khipo-Themis_Project',
         'FILES_EXPIRES': 0,
         'DOWNLOAD_TIMEOUT': 300
