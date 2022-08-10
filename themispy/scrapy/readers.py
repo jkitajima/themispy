@@ -5,7 +5,10 @@ from azure.storage.blob import BlobClient
 
 def read_jsonl(blob: str, attr: str = 'url', encoding: str = 'UTF-8',
                startswith: str = 'http') -> 'list[str]':
-    """Reads all JSON Lines datasources from the specified blob and container."""
+    """
+    Reads all JSON Lines datasources from the specified
+    blob and container.
+    """
     attr = f'"{attr}": "'
     
     blob_client = BlobClient.from_connection_string(

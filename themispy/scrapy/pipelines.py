@@ -17,12 +17,8 @@ from themispy.project.utils import get_logpath, split_filepath
 
 class AzureBlobUploadPipeline:
     """
-    Custom class created in order to upload blobs to Azure Storage.
-    The connection to Azure Storage is made during the 'open_spider'
-    method and the blob upload is made during the 'close_spider' method
-    in the Item Pipeline.
-    Blob name defaults to "{spider.name}.jsonl" and the container name
-    is retrieved from "AZCONTAINER_PATH" environment variable.
+    Custom class created in order to upload blobs to Azure Storage
+    using default spider crawling.
     """
     def open_spider(self, spider):
         print(f"Opening Blob Client@Container<'{os.environ['AZCONTAINER_PATH']}'>.")
@@ -82,5 +78,5 @@ class AzureFileDownloaderPipeline(FilesPipeline):
         self.blob_client.upload_blob(data=buf, overwrite=True, logging_enable=True)
         
         
-        self.store.persist_file(path, buf, info)
+        # self.store.persist_file(path, buf, info)
         return checksum

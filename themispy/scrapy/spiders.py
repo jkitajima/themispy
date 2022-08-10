@@ -18,9 +18,6 @@ def run_spider(spider: Spider, pipeline: str = None,
     * 'settings': Scrapy Settings object.
     * 'override': If set to 'True', the settings passed will
     override all previous settings.
-    * 'project_name': Scraping project name.
-    (Used in 'scrapy startproject <name>' command).\n
-    Defaults to 'scraping'.
     """
     if pipeline is not None and pipeline != 'blob' and pipeline !='download':
         raise Exception("Pipeline must be either 'blob' or 'download'.")
