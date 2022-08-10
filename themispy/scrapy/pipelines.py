@@ -78,5 +78,5 @@ class AzureFileDownloaderPipeline(FilesPipeline):
         self.blob_client.upload_blob(data=buf, overwrite=True, logging_enable=True)
         
         
-        # self.store.persist_file(path, buf, info)
+        self.store.persist_file(path, buf, info)
         return checksum
