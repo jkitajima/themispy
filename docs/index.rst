@@ -6,11 +6,12 @@
 Página Inicial da Documentação
 ==============================
 
-Aqui encontra-se a documentação do componente **themispy**, utilizado para o
+   Aqui encontra-se a documentação do componente **themispy**, utilizado para o
 desenvolvimento do projeto Themis para extração de dados governamentais.
 Sua estrutura é muito simples, sendo divida em duas seções:
-* 'project': referente à funções relacionadas aos projetos em geral
-* 'scrapy': referente à funções relacionadas ao *framework* Scrapy e sua integração com a Azure
+
+* **Project**: referente à funções relacionadas aos projetos em geral
+* **Scrapy**: referente à funções relacionadas ao `framework <https://scrapy.org/>`_ e sua integração com a `Azure <https://github.com/Azure/azure-sdk-for-python>`_
 
 
 
