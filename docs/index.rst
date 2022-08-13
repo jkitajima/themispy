@@ -11,8 +11,7 @@ desenvolvimento do projeto Themis para extração de dados governamentais.
 Sua estrutura é muito simples, sendo divida em duas seções:
 
 * **Project**: referente à funções relacionadas aos projetos em geral;
-* **Scrapy**: referente à funções relacionadas ao `framework <https://scrapy.org/>`_
-e sua integração com a `Azure <https://github.com/Azure/azure-sdk-for-python>`_.
+* **Scrapy**: referente à funções relacionadas ao `framework <https://scrapy.org/>`_ e sua integração com a `Azure <https://github.com/Azure/azure-sdk-for-python>`_.
 
 
 
