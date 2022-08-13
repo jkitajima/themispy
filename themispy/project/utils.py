@@ -5,9 +5,15 @@ import pytz
 
 
 def split_filepath(url: str) -> 'tuple[str, str]':
-    """
-    Splits an url and returns the document name and extension
-    as a 2-element tuple.
+    """Splits a file url and returns the document name and extension as
+    a 2-element tuple.
+    
+    Args:
+        url: File URL
+        
+    Returns:
+        Document name and extension as a 2-element tuple
+    
     """
     docname, docext = os.path.splitext(url)
     docname = docname.rsplit('/')[-1]
