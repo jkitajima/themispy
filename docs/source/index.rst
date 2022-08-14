@@ -11,6 +11,8 @@ sendo divida em duas seções:
 
 
 .. toctree::
+    :caption: Table of Contents
+    
     index
     themispy.project
     themispy.scrapy
