@@ -11,11 +11,8 @@ sendo divida em duas seções:
 
 
 .. toctree::
-    :maxdepth: 2
-
-    modules
+    index
     themispy.project
-    themispy
     themispy.scrapy
 
 
