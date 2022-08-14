@@ -12,12 +12,11 @@ sendo divida em duas seções:
 
 .. toctree::
    :maxdepth: 2
-   :caption: Contents:
 
-        modules
-        themispy.project
-        themispy
-        themispy.scrapy
+    modules
+    themispy.project
+    themispy
+    themispy.scrapy
 
 
 
