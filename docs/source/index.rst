@@ -1,27 +1,23 @@
-Página Inicial da Documentação
-==============================
+===============================
+Documentação themispy |version|
+===============================
 
-Seja bem-vindo(a) à documentação do componente **themispy**, utilizado para o 
-desenvolvimento do projeto Themis para extração de dados. Sua estrutura é muito simples, 
-sendo divida em duas seções:
+Seja bem-vindo(a) à documentação do componente **themispy**,
+utilizado durante o desenvolvimento do projeto Themis para extração de dados.
+Sua estrutura é muito simples, sendo divida em duas seções:
 
 * **Project**: referente à funções relacionadas aos projetos em geral;
-* **Scrapy**: referente à funções relacionadas ao `framework <https://scrapy.org/>`_ e sua integração com a `Azure <https://github.com/Azure/azure-sdk-for-python>`_.
+* **Scrapy**: referente à funções relacionadas ao `framework`_ e sua integração com a `Azure`_.
+
+
+.. Links
+.. _framework: https://scrapy.org/
+.. _Azure: https://github.com/Azure/azure-sdk-for-python
 
 
 
 .. toctree::
-    :caption: Table of Contents
-    
+    :caption: Página Inicial
+    :hidden:
+
     index
-    themispy.project
-    themispy.scrapy
-
-
-
-Índices
-=======
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`

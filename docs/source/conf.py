@@ -6,14 +6,20 @@
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
+import datetime
 import os
 import sys
 
 
-sys.path.insert(0, os.path.abspath('../../themispy/'))
+sys.path.insert(0, os.path.dirname(os.path.dirname(__file__)))
 
 project = 'themispy'
-copyright = '2022, Khipo'
+
+if datetime.datetime.now().year == 2022:
+    copyright = f"2022, Khipo"
+else:
+    copyright = f"2022-{datetime.datetime.now().year}, Khipo"
+
 author = 'Khipo'
 
 # -- General configuration ---------------------------------------------------
