@@ -9,10 +9,10 @@ def split_filepath(url: str) -> 'tuple[str, str]':
     a 2-element tuple.
     
     Args:
-        url: File URL
+        url (str): File URL.
         
     Returns:
-        Document name and extension as a 2-element tuple
+        Document name and extension as a 2-element tuple.
     
     """
     docname, docext = os.path.splitext(url)

@@ -10,13 +10,15 @@ sendo divida em duas seções:
 
 
 
-.. automodule:: themispy.project.utils
-    :members:
-
-
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
+
+
+modules
+themispy.project
+themispy
+themispy.scrapy
 
 
 
