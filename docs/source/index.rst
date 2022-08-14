@@ -11,7 +11,7 @@ sendo divida em duas seções:
 
 
 .. toctree::
-   :maxdepth: 2
+    :maxdepth: 2
 
     modules
     themispy.project
