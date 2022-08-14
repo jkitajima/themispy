@@ -14,11 +14,10 @@ sendo divida em duas seções:
    :maxdepth: 2
    :caption: Contents:
 
-
-modules
-themispy.project
-themispy
-themispy.scrapy
+    modules
+    themispy.project
+    themispy
+    themispy.scrapy
 
 
 
