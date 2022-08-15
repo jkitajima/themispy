@@ -40,7 +40,7 @@ pipelines.py
         Cliente de conexão com um Blob no Azure Storage.
         O Blob não precisa existir previamente.
         Para que o cliente possa ser criado, são necessários:
-        ``con_str``, ``container_name``, ``blob_name``.
+        ``conn_str``, ``container_name``, ``blob_name``.
         Também, por padrão, ``logging_enable`` possui o valor ``True``.
 
 
@@ -88,7 +88,7 @@ pipelines.py
         Cliente de conexão com um container no Azure Storage.
         O Container precisa existir previamente.
         Para que o cliente possa ser criado, são necessários:
-        ``con_str`` e ``container_name``.
+        ``conn_str`` e ``container_name``.
         Também, por padrão, ``logging_enable`` possui o valor ``True``.
 
 
@@ -120,9 +120,15 @@ readers.py
     Função para ler todas as fontes de dados de um arquivo ``crawler.jsonl``.
     Por padrão, irá buscar por chaves ``"url"``.
 
-    :param [str] blob: Nome do arquivo que deverá ser lido. 
+    :param str blob: Nome do arquivo que deverá ser lido.
 
-    
+    :param str attr: Nome da chave que será buscada no dicionário que está no aqruivo ``.jsonl``. (``"url"`` é o padrão.)
+
+    :param str encoding: Formato de codificação dos caracteres. (``UTF-8`` é o padrão.)
+
+    :param str startswith: Protocolo que inicia a URL das fontes de dados. (``http`` é o padrão.)
+
+    :returns: Retorna como uma lista de strings todas as fontes de dados lidas no arquivo especificado.
 
 
 

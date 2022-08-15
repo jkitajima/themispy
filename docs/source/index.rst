@@ -9,8 +9,8 @@ Sua estrutura é muito simples, sendo divida em duas pacotes:
 * **Project**: referente à funcionalidades relacionadas aos projetos em geral;
 * **Scrapy**: referente à funcionalidades relacionadas ao `framework`_ e sua integração com a `Azure`_.
 
-Você encontrará mais detalhes sobre os pacotes em suas respectivas páginas, as quais podem acessadas
-na barra de navegação lateral. Ainda, você pode acessar a página do `PyPI`_. 
+Você encontrará mais detalhes sobre os pacotes em suas respectivas páginas, as quais podem ser acessadas
+na barra de navegação lateral. Ainda, você pode acessar a página do projeto no `PyPI`_. 
 
 .. Links
 .. _framework: https://scrapy.org/
