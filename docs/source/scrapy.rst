@@ -12,11 +12,12 @@ aonde existe uma função criada para ler fontes de dados de blobs na Azure.
 items.py
 --------
 
-.. automodule:: themispy.project.items
+.. autoclass:: themispy.project.items
     :members:
     :undoc-members:
     :show-inheritance:
 
+.. autoattribute:: themispy.project.items.FileDownloader
 
 
 pipelines.py

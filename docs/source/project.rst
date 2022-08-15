@@ -2,6 +2,8 @@
 project
 =======
 
+Pacote destinado a conter funcionalidades genéricas aos projetos.
+
 
 utils.py
 --------
