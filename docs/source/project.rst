@@ -14,7 +14,7 @@ utils.py
 
     :param str url: URL do arquivo.
 
-    :returns Nome do arquivo e sua extensão como uma tupla de dois elementos.:   
+    :returns: Nome do arquivo e sua extensão como uma tupla de dois elementos.   
 
 
 
@@ -24,4 +24,4 @@ utils.py
 
     :param str tz: Fuso-horário. (Padrão: ``America/Sao_Paulo``)
 
-    :returns Data atual com o formato adequado.:
+    :returns: Data atual com o formato adequado.
