@@ -40,42 +40,42 @@ pipelines.py
         Cliente de conexão com um Blob no Azure Storage.
         O Blob não precisa existir previamente.
         Para que o cliente possa ser criado, são necessários:
-        `con_str`, `container_name`, `blob_name`.
-        Também, por padrão, `logging_enable` possui o valor `True`.
+        ``con_str``, ``container_name``, ``blob_name``.
+        Também, por padrão, ``logging_enable`` possui o valor ``True``.
 
 
     .. attribute:: content
 
         String vazia que será preenchida, linha a linha, com o dicionário
-        será retornado da sentença `yield` na construção da Spider.
+        será retornado da sentença ``yield`` na construção da Spider.
 
 
     .. method:: open_spider(self, spider)
 
-        Neste método será criada a conexão com o Blob e também inicializado atributo `content`.
+        Neste método será criada a conexão com o Blob e também inicializado atributo ``content``.
 
     
     .. method:: process_item(self, item, spider)
 
-        Aqui será processado o retorno dos dados do crawler e convertido para `.jsonl`.
+        Aqui será processado o retorno dos dados do crawler e convertido para ``.jsonl``.
 
 
     .. method:: close_spider(self, spider)
 
         É aqui, durante o encerramento da spider, que o todo o conteúdo gerado
-        durante o processamento será enviado para o Azure Storage, através do método `upload_blob`.
-        Por padrão, será passado como argumento `overwrite=True`.
+        durante o processamento será enviado para o Azure Storage, através do método ``upload_blob``.
+        Por padrão, será passado como argumento ``overwrite=True``.
 
 
 
 .. class:: themispy.project.items.AzureFileDownloaderPipeline
     
-    Classe extendida a partir da classe `FilesPipeline` do Scrapy.
+    Classe extendida a partir da classe ``FilesPipeline`` do Scrapy.
     É utilizada para se baixar arquivos (os quais são fornecidas suas URLs de download).
     Os arquivos são enviados diretamente para o Azure Storage.
 
     .. note::
-        Não esquecer de passar nas configurações do Scrapy a chave `FILES_STORE`.
+        Não esquecer de passar nas configurações do Scrapy a chave ``FILES_STORE``.
 
 
     .. attribute:: spiderinfo
@@ -88,15 +88,15 @@ pipelines.py
         Cliente de conexão com um container no Azure Storage.
         O Container precisa existir previamente.
         Para que o cliente possa ser criado, são necessários:
-        `con_str` e `container_name`.
-        Também, por padrão, `logging_enable` possui o valor `True`.
+        ``con_str`` e ``container_name``.
+        Também, por padrão, ``logging_enable`` possui o valor ``True``.
 
 
     .. attribute:: blob_client
 
         Cliente de conexão com um Blob no Azure Storage.
         O Blob não precisa existir previamente.
-        Para que o cliente possa ser criado, é necessário passar o nome do `blob` que será criado.
+        Para que o cliente possa ser criado, é necessário passar o nome do ``blob`` que será criado.
 
 
     .. method:: open_spider(self, spider)
@@ -117,8 +117,10 @@ readers.py
 
 .. function:: themispy.project.readers.read_jsonl(blob: str, attr: str = 'url', encoding: str = 'UTF-8', startswith: str = 'http') -> 'list[str]'
 
-    Função para ler todas as fontes de dados de um arquivo `crawler.jsonl`.
-    Por padrão, irá buscar por chaves `"url"`.
+    Função para ler todas as fontes de dados de um arquivo ``crawler.jsonl``.
+    Por padrão, irá buscar por chaves ``"url"``.
+
+    :param [str] blob: Nome do arquivo que deverá ser lido. 
 
     
 
