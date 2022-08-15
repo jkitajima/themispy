@@ -135,7 +135,18 @@ readers.py
 spiders.py
 ------------
 
-.. automodule:: themispy.project.spiders
-    :members:
-    :undoc-members:
-    :show-inheritance:
+.. function:: themispy.project.spiders.run_spider(spider: scrapy.Spider, pipeline: str = None, settings: dict = None, override: bool = False) -> None
+
+    Processo para executar spiders.
+
+
+    :param scrapy.Spider spider: Spider a ser executada.
+
+    :param str pipeline: Pipeline a ser utilizada durante a execução da spider.
+        Deve ser ``blob`` ou ``download``. Referindo, respectivamente, as pipelines de AzureBlobUpload ou AzureFileDownloader.
+
+    :param dict settings: Configurações do Scrapy para a execução das spiders.
+        Passe aqui suas configurações personalizáveis para serem adicionadas às padrões.
+
+    :param bool override: Caso seja ``True``, as configurações passadas sobrescreverão todas as anteriores.
+
