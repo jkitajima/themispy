@@ -7,12 +7,14 @@ import scrapy
 
 
 class FileDownloader(scrapy.Item):
-    """
-    Scrapy Item Class defined for downloading files.
+    """Scrapy Item Class defined for downloading files.
     
-    Attributes are:
-    * 'file_urls': stores the urls used for downloading files.
-    * 'files': stores metadata info about downloading process.
+    Attributes:
+        file_urls (scrapy.Field): campo que receberá a URL do arquivo
+            a ser baixado.
+        files (scrapy.Field): campo que registrará o status do arquivo
+            a ser baixado.
+    
     """
     file_urls = scrapy.Field() # Do not rename this!
     files = scrapy.Field() # Do not rename this!
