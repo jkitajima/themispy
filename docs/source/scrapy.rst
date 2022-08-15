@@ -5,8 +5,8 @@ scrapy
 Neste pacote, os módulos foram criados seguindo do modelo do Scrapy,
 a fim de manter um padrão de documentação e uso.
 
-A única novidade é o módulo denominado *readers.py*,
-aonde existe uma função criada para ler fontes de dados de blobs na Azure.
+A única novidade é o módulo denominado ``readers.py``,
+onde existe uma função criada para ler fontes de dados de blobs na Azure.
 
 
 items.py

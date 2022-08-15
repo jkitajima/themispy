@@ -3,6 +3,8 @@ requires = ["setuptools"]
 build-backend = "setuptools.build_meta"
 
 [project]
+name = "themispy"
+version = "0.1.4"
 readme = "README.md"
 
 [project.urls]
