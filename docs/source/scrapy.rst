@@ -9,8 +9,8 @@ A única novidade é o módulo denominado *readers.py*,
 aonde existe uma função criada para ler fontes de dados de blobs na Azure.
 
 
-Scrapy: Items
--------------
+items.py
+--------
 
 .. automodule:: themispy.project.items
     :members:
@@ -19,6 +19,9 @@ Scrapy: Items
 
 
 
+pipelines.py
+------------
+
 .. automodule:: themispy.project.pipelines
     :members:
     :undoc-members:
@@ -26,12 +29,18 @@ Scrapy: Items
 
 
 
+readers.py
+------------
+
 .. automodule:: themispy.project.readers
     :members:
     :undoc-members:
     :show-inheritance:
 
 
+
+spiders.py
+------------
 
 .. automodule:: themispy.project.spiders
     :members:
