@@ -18,10 +18,10 @@ Sua estrutura é muito simples, sendo divida em duas seções:
 
 .. toctree::
     :caption: Documentação
-    :maxdepth: 0
-    :hidden:
-
+    :includehidden:
+    
     index
+
 
 
 .. toctree::

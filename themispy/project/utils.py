@@ -15,13 +15,6 @@ def split_filepath(url: str) -> 'tuple[str, str]':
         Nome do arquivo e sua extensão como uma tupla de dois
         elementos.
     
-    Example:
-        docname, docext = split_filepath('https://www.origem.com/arquivo.xml')
-        
-        Então:
-        docname = 'arquivo'
-        docext = '.xml'
-    
     """
     docname, docext = os.path.splitext(url)
     docname = docname.rsplit('/')[-1]
@@ -39,8 +32,7 @@ def get_logpath(tz: str = 'America/Sao_Paulo') -> str:
         Data atual com o formato adequado.
         
     Example:
-        Supondo dia atual como 14/08/2022 a função retornará uma string
-        como: '2022/08/14'.
+        Supondo dia atual como 14/08/2022 a função retornará: '2022/08/14'.
     
     """
     tz = pytz.timezone(tz)
