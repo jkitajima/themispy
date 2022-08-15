@@ -12,11 +12,17 @@ aonde existe uma função criada para ler fontes de dados de blobs na Azure.
 items.py
 --------
 
-.. autoclass:: themispy.project.items.FileDownloader
-    :members:
-    :undoc-members:
-    :show-inheritance:
+.. class:: themispy.project.items.FileDownloader
 
+    Classe de Item do Scrapy que serve como base para baixar arquivos.
+
+    .. attribute:: file_urls
+
+        Campo que receberá a URL do arquivo a ser baixado.
+
+    .. attribute:: files
+
+        Campo que registrará o status do arquivo a ser baixado.
 
 
 pipelines.py
