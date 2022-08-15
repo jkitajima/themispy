@@ -18,9 +18,9 @@ Sua estrutura é muito simples, sendo divida em duas seções:
 
 .. toctree::
     :caption: Documentação
-    :includehidden:
+    :hidden:
+        index
     
-    index
 
 
 
