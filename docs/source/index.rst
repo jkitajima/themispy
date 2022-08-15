@@ -21,15 +21,11 @@ na barra de navegação lateral. Ainda, você pode acessar a página do `PyPI`_.
 
 .. toctree::
     :caption: Documentação
-    :includehidden:
-        index
-    
 
 
 
 .. toctree::
     :caption: Pacotes
-    :hidden:
 
     project
     scrapy
