@@ -108,17 +108,19 @@ pipelines.py
     
         É precisamente neste método, exatamente no momento em que os dados do arquivo
         baixado estão em memória, que é criado um cliente com o Blob e o arquivo é subido no Azure Storage.
-        Por padrão, é passado ao `upload_blob` o argumento `overwrite=True`.
+        Por padrão, é passado ao ``upload_blob`` o argumento ``overwrite=True``.
 
 
 
 readers.py
 ------------
 
-.. autofunction:: themispy.project.readers.read_jsonl
-    :members:
-    :undoc-members:
-    :show-inheritance:
+.. function:: themispy.project.readers.read_jsonl(blob: str, attr: str = 'url', encoding: str = 'UTF-8', startswith: str = 'http') -> 'list[str]'
+
+    Função para ler todas as fontes de dados de um arquivo `crawler.jsonl`.
+    Por padrão, irá buscar por chaves `"url"`.
+
+    
 
 
 
