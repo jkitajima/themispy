@@ -148,5 +148,4 @@ spiders.py
     :param dict settings: Configurações do Scrapy para a execução das spiders.
         Passe aqui suas configurações personalizáveis para serem adicionadas às padrões.
 
-    :param bool override: Caso seja ``True``, as configurações passadas sobrescreverão todas as anteriores.
-
+    :param bool override: Caso seja ``True``, as configurações recebidas sobrescreverão todas as anteriores.
