@@ -18,10 +18,10 @@ Sua estrutura é muito simples, sendo divida em duas seções:
 
 .. toctree::
     :caption: Documentação
+    :maxdepth: 0
     :hidden:
 
     index
-
 
 
 .. toctree::
@@ -29,3 +29,4 @@ Sua estrutura é muito simples, sendo divida em duas seções:
     :hidden:
 
     project
+    scrapy
