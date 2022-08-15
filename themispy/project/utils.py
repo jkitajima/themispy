@@ -5,16 +5,15 @@ import pytz
 
 
 def split_filepath(url: str) -> 'tuple[str, str]':
-    """Divide a URL de um arquivo e retorna uma tupla contendo dois
-    elementos, respectivamente: o nome do arquivo e sua extensão.
+    """Splits a URL filepath and returns the document name and
+    extension as a 2-element tuple.
     
     Args:
-        url (str): URL do arquivo.
+        url (str): File URL.
         
     Returns:
-        Nome do arquivo e sua extensão como uma tupla de dois
-        elementos.
-    
+        Document name and extension as a 2-element tuple.
+        
     """
     docname, docext = os.path.splitext(url)
     docname = docname.rsplit('/')[-1]
@@ -22,17 +21,18 @@ def split_filepath(url: str) -> 'tuple[str, str]':
 
 
 def get_logpath(tz: str = 'America/Sao_Paulo') -> str:
-    """Função utilizada para construir um padrão de data com o formato
-    adequado para utilização nas pastas do sistema.
+    """Returns the current date properly formatted for logging
+    directories.
     
     Args:
-        tz (str): Fuso-horário. (São Paulo é utilizado por padrão).
+        tz (str): Timezone. (Default is 'America/Sao_Paulo')
         
     Returns:
-        Data atual com o formato adequado.
+        Current date reversed as a string.
         
     Example:
-        Supondo dia atual como 14/08/2022 a função retornará: '2022/08/14'.
+        If today is 14/08/2022 (DD/MM/YYYY), then the function will
+    return '2022/08/14'.
     
     """
     tz = pytz.timezone(tz)

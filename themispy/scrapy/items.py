@@ -10,11 +10,11 @@ class FileDownloader(scrapy.Item):
     """Scrapy Item Class defined for downloading files.
     
     Attributes:
-        file_urls (scrapy.Field): campo que receberá a URL do arquivo
-            a ser baixado.
-        files (scrapy.Field): campo que registrará o status do arquivo
-            a ser baixado.
-    
+        file_urls (scrapy.Field): this attribute holds the URL of the
+    file that will be downloaded.
+        files (scrapy.Field): register the status of the downloading
+    process.
+        
     """
     file_urls = scrapy.Field() # Do not rename this!
     files = scrapy.Field() # Do not rename this!

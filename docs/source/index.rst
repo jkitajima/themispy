@@ -23,5 +23,5 @@ Mais detalhes sobre sua versão podem ser encontados na página do `PyPI`_.
 .. toctree::
     :caption: Pacotes
 
-    project
-    scrapy
+    themispy.project
+    themispy.scrapy

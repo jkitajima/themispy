@@ -118,7 +118,7 @@ readers.py
 .. function:: themispy.project.readers.read_jsonl(blob: str, attr: str = 'url', encoding: str = 'UTF-8', startswith: str = 'http') -> 'list[str]'
 
     Função para ler todas as fontes de dados de um arquivo ``crawler.jsonl``.
-    Por padrão, irá buscar por chaves ``"url"``.
+    Por padrão, irá buscar por chaves ``url``.
 
     :param str blob: Nome do arquivo que deverá ser lido.
 

@@ -12,12 +12,13 @@ def run_spider(spider: Spider, pipeline: str = None,
     """
     Process for running spiders.
     
-    Attributes are:
-    * 'spider': Spider Class used for crawling.
-    * 'pipeline': Must be either 'blob' or 'download'.
-    * 'settings': Scrapy Settings object.
-    * 'override': If set to 'True', the settings passed will
+    Attributes:
+        spider (scrapy.Spider): Spider class used for crawling.
+        pipeline (str): Must be either 'blob' or 'download'.
+        settings (dict): Scrapy Settings object.
+        override (str): If set to 'True', the settings passed will
     override all previous settings.
+    
     """
     if pipeline is not None and pipeline != 'blob' and pipeline !='download':
         raise Exception("Pipeline must be either 'blob' or 'download'.")

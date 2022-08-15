@@ -4,3 +4,6 @@ build-backend = "setuptools.build_meta"
 
 [project]
 readme = "README.md"
+
+[project.urls]
+Homepage = "https://themispy.readthedocs.io/pt_BR/latest/index.html"
