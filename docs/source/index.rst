@@ -1,5 +1,5 @@
 ===============================
-Documentação themispy |version|
+Página Inicial
 ===============================
 
 Seja bem-vindo(a) à documentação do componente **themispy**,
@@ -17,7 +17,15 @@ Sua estrutura é muito simples, sendo divida em duas seções:
 
 
 .. toctree::
-    :caption: Página Inicial
+    :caption: Documentação
     :hidden:
 
     index
+
+
+
+.. toctree::
+    :caption: Pacotes
+    :hidden:
+
+    project
