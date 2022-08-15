@@ -1,3 +1,3 @@
 # themispy
 
-Python package for Scrapy-Azure Integration
+Componente utilizado durante o desenvolvimento do projeto Themis para extração de dados.
