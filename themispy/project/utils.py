@@ -5,14 +5,22 @@ import pytz
 
 
 def split_filepath(url: str) -> 'tuple[str, str]':
-    """Splits a file url and returns the document name and extension as
-    a 2-element tuple.
+    """Divide a URL de um arquivo e retorna uma tupla contendo dois
+    elementos, respectivamente: o nome do arquivo e sua extensão.
     
     Args:
-        url (str): File URL.
+        url (str): URL do arquivo.
         
     Returns:
-        Document name and extension as a 2-element tuple.
+        Nome do arquivo e sua extensão como uma tupla de dois
+        elementos.
+    
+    Example:
+        docname, docext = split_filepath('https://www.origem.com/arquivo.xml')
+        
+        Então:
+        docname = 'arquivo'
+        docext = '.xml'
     
     """
     docname, docext = os.path.splitext(url)
@@ -21,15 +29,19 @@ def split_filepath(url: str) -> 'tuple[str, str]':
 
 
 def get_logpath(tz: str = 'America/Sao_Paulo') -> str:
-    """
-    Returns the current date formatted for logging directories.
-    \nExample:\n
-    * container_fullpath = 'my_container/subdir' + get_logpath() \n
-    Printing 'container_fullpath' will return:
-    * 'my_container/subdir/<THIS_YEAR>/<THIS_MONTH>/<THIS_DAY>'.\n
+    """Função utilizada para construir um padrão de data com o formato
+    adequado para utilização nas pastas do sistema.
     
-    :param str: timezone\n
-    Default timezone is 'America/Sao_Paulo'.
+    Args:
+        tz (str): Fuso-horário. (São Paulo é utilizado por padrão).
+        
+    Returns:
+        Data atual com o formato adequado.
+        
+    Example:
+        Supondo dia atual como 14/08/2022 a função retornará uma string
+        como: '2022/08/14'.
+    
     """
     tz = pytz.timezone(tz)
     return datetime.datetime.now(tz=tz).strftime('/%Y/%m/%d')
