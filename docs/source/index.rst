@@ -22,6 +22,8 @@ Mais detalhes sobre sua versão podem ser encontados na página do `PyPI`_.
 
 .. toctree::
     :caption: Pacotes
-
-    themispy.project
-    themispy.scrapy
+    :hidden:
+        index
+        
+        project
+        scrapy
