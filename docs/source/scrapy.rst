@@ -1,8 +1,8 @@
-=======
+======
 scrapy
-=======
+======
 
-Neste pacote, os módulos foram criados a partir do modelo do Scrapy,
+Neste pacote, os módulos foram criados seguindo do modelo do Scrapy,
 a fim de manter um padrão de documentação e uso.
 
 A única novidade é o módulo denominado *readers.py*,
@@ -15,6 +15,7 @@ items.py
 .. class:: themispy.project.items.FileDownloader
 
     Classe de Item do Scrapy que serve como base para baixar arquivos.
+    Extende a classe de 'Item' do Scrapy.
 
     .. attribute:: file_urls
 
@@ -28,17 +29,93 @@ items.py
 pipelines.py
 ------------
 
-.. automodule:: themispy.project.pipelines
-    :members:
-    :undoc-members:
-    :show-inheritance:
+.. class:: themispy.project.items.AzureBlobUploadPipeline
+
+    Classe criada a fim de subir arquivos para o Azure Storage.
+    Extende a classe 'Spider' padrão do Scrapy.
+
+
+    .. attribute:: blob_client
+
+        Cliente de conexão com um Blob no Azure Storage.
+        O Blob não precisa existir previamente.
+        Para que o cliente possa ser criado, são necessários:
+        `con_str`, `container_name`, `blob_name`.
+        Também, por padrão, `logging_enable` possui o valor `True`.
+
+
+    .. attribute:: content
+
+        String vazia que será preenchida, linha a linha, com o dicionário
+        será retornado da sentença `yield` na construção da Spider.
+
+
+    .. method:: open_spider(self, spider)
+
+        Neste método será criada a conexão com o Blob e também inicializado atributo `content`.
+
+    
+    .. method:: process_item(self, item, spider)
+
+        Aqui será processado o retorno dos dados do crawler e convertido para `.jsonl`.
+
+
+    .. method:: close_spider(self, spider)
+
+        É aqui, durante o encerramento da spider, que o todo o conteúdo gerado
+        durante o processamento será enviado para o Azure Storage, através do método `upload_blob`.
+        Por padrão, será passado como argumento `overwrite=True`.
+
+
+
+.. class:: themispy.project.items.AzureFileDownloaderPipeline
+    
+    Classe extendida a partir da classe `FilesPipeline` do Scrapy.
+    É utilizada para se baixar arquivos (os quais são fornecidas suas URLs de download).
+    Os arquivos são enviados diretamente para o Azure Storage.
+
+    .. note::
+        Não esquecer de passar nas configurações do Scrapy a chave `FILES_STORE`.
+
+
+    .. attribute:: spiderinfo
+        
+        Informações da spider que serão necessárias para o registro do status de download dos arquivos.
+
+
+    .. attribute:: container_client
+
+        Cliente de conexão com um container no Azure Storage.
+        O Container precisa existir previamente.
+        Para que o cliente possa ser criado, são necessários:
+        `con_str` e `container_name`.
+        Também, por padrão, `logging_enable` possui o valor `True`.
+
+
+    .. attribute:: blob_client
+
+        Cliente de conexão com um Blob no Azure Storage.
+        O Blob não precisa existir previamente.
+        Para que o cliente possa ser criado, é necessário passar o nome do `blob` que será criado.
+
+
+    .. method:: open_spider(self, spider)
+
+        É durante a abertura da spider que a conexão com o container é criada.
+        Dessa maneira, independentemente de quantos arquivos serão baixados, apenas uma conexão com o container é criada.
+
+    .. method:: file_downloaded(self, response, request, info, *, item=None)
+    
+        É precisamente neste método, exatamente no momento em que os dados do arquivo
+        baixado estão em memória, que é criado um cliente com o Blob e o arquivo é subido no Azure Storage.
+        Por padrão, é passado ao `upload_blob` o argumento `overwrite=True`.
 
 
 
 readers.py
 ------------
 
-.. automodule:: themispy.project.readers
+.. autofunction:: themispy.project.readers.read_jsonl
     :members:
     :undoc-members:
     :show-inheritance:
