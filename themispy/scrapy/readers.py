@@ -3,30 +3,38 @@ import os
 from azure.storage.blob import BlobClient
 
 
-def read_jsonl(blob: str, attr: str = 'url', encoding: str = 'UTF-8',
-               startswith: str = 'http') -> 'list[str]':
-    """
-    Reads all JSON Lines datasources from the specified
-    blob and container.
-    """
-    attr = f'"{attr}": "'
+def read_jsonlines_blob(blob: str, encoding: str = 'UTF-8',
+                        attr: str = None, logging_enable: bool = True,
+                        conn_str: str = os.getenv('AzureWebJobsStorage'),
+                        container: str = os.getenv('AZCONTAINER_PATH')):
+    """Reads jsonlines document from the specified blob.
     
-    blob_client = BlobClient.from_connection_string(
-        conn_str=os.environ['AzureWebJobsStorage'],
-        container_name=os.environ['AZCONTAINER_PATH'],
-        blob_name=blob,
-        logging_enable=True)
-    
-    stream = blob_client.download_blob()
-    content, datasources = [], []
-    
-    for i in stream.content_as_text(encoding=encoding).split(attr):
-        if i.startswith(f"{startswith}"):
-            content.append(i)
+    Args:
+        blob (str): Blob name.
+        container (str): Container path. Defaults to ``os.getenv('AZCONTAINER_PATH')``.
+        conn_str (str): Azure connection string. Defaults to ``os.getenv('AzureWebJobsStorage')``.
+        attr (str): Use this if you want to yield values only from a specific attribute from the document.
+        encoding (str): Encoding type. Defaults to ``UTF-8``.
+        logging_enable(bool) : If you want to enable logging or not. Defaults to ``True``.
         
-    for i in content:
-        idx = i.find('"')
-        i = i[:idx]
-        datasources.append(i)
+    Yields:
+        JSON Object or value from the specified attribute.
+    """
+    blob_client = BlobClient.from_connection_string(
+        conn_str=conn_str,
+        container_name=container,
+        blob_name=blob,
+        logging_enable=logging_enable)
     
-    return datasources
+    content = blob_client.download_blob().content_as_text(encoding=encoding).splitlines()
+    
+    if attr is not None and attr in content[0]:
+        attr = f'"{attr}": "'
+        
+        for line in content:
+            idx = line.find(attr)
+            value = line[idx + len(attr):]
+            idx = value.find('"')
+            yield value[:idx]
+    else:
+        yield from content
