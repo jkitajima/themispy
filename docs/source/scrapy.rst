@@ -115,20 +115,23 @@ pipelines.py
 readers.py
 ------------
 
-.. function:: themispy.project.readers.read_jsonl(blob: str, attr: str = 'url', encoding: str = 'UTF-8', startswith: str = 'http') -> 'list[str]'
+.. function:: themispy.project.readers.read_jsonlines_blob(blob: str, encoding: str = 'UTF-8', attr: str = None, logging_enable: bool = True, conn_str: str = os.getenv('AzureWebJobsStorage'), container: str = os.getenv('AZCONTAINER_PATH'))
 
-    Função para ler todas as fontes de dados de um arquivo ``crawler.jsonl``.
-    Por padrão, irá buscar por chaves ``url``.
+    Lê o documento ``jsonlines`` do blob em questão. Opcionalmente, você pode buscar por um atributo específico.
 
-    :param str blob: Nome do arquivo que deverá ser lido.
-
-    :param str attr: Nome da chave que será buscada no dicionário que está no aqruivo ``.jsonl``. (``"url"`` é o padrão.)
+    :param str blob: Nome do arquivo que deverá ser lido. Exemplo: ``meu_arquivo.jsonl``.
 
     :param str encoding: Formato de codificação dos caracteres. (``UTF-8`` é o padrão.)
 
-    :param str startswith: Protocolo que inicia a URL das fontes de dados. (``http`` é o padrão.)
+    :param str attr: Nome da chave que será buscada no dicionário que está no arquivo ``.jsonl``. Exemplo: a função irá buscar por ``"url"`` caso você passe ``url`` como argumento.
 
-    :returns: Retorna como uma lista de strings todas as fontes de dados lidas no arquivo especificado.
+    :param bool logging_enable: Indica se a função deverá ativar o logger ou não. (Padrão é ``True``.)
+
+    :param str conn_str: Chave de conexão com o Azure Storage. (Padrão é: ``os.getenv('AzureWebJobsStorage')``).
+
+    :param str container: Caminho do arquivo dentro do container. (Padrão é: ``os.getenv('AZCONTAINER_PATH')``).
+
+    :yields: Um objeto JSON ou o valor do atributo especificado.
 
 
 
