@@ -15,11 +15,14 @@ def read_jsonlines_blob(blob: str, encoding: str = 'UTF-8',
         conn_str (str): Azure connection string. Defaults to ``os.getenv('AzureWebJobsStorage')``.
         attr (str): Use this if you want to yield values only from a specific attribute from the document.
         encoding (str): Encoding type. Defaults to ``UTF-8``.
-        logging_enable(bool) : If you want to enable logging or not. Defaults to ``True``.
-        
+        logging_enable(bool): If you want to enable logging or not. Defaults to ``True``.
+
     Yields:
         JSON Object or value from the specified attribute.
     """
+    if os.path.splitext(blob)[1] != '.jsonl':
+        raise Exception('Blob must be a jsonlines document (".jsonl").')
+    
     blob_client = BlobClient.from_connection_string(
         conn_str=conn_str,
         container_name=container,
