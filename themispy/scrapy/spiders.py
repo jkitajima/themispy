@@ -20,8 +20,8 @@ def run_spider(spider: Spider, pipeline: str = None,
     override all previous settings.
     
     """
-    if pipeline is not None and pipeline != 'blob' and pipeline !='download':
-        raise Exception("Pipeline must be either 'blob' or 'download'.")
+    if pipeline is not None and pipeline != 'blob' and pipeline !='download' and pipeline != 'append':
+        raise Exception("Pipeline must be either 'blob', 'append' or 'download'.")
     
     # Configure Scrapy Project Settings
     scrapy_settings = get_project_settings()
@@ -38,6 +38,10 @@ def run_spider(spider: Spider, pipeline: str = None,
     if pipeline == 'blob':
         scrapy_settings.update({
             'ITEM_PIPELINES': {f'themispy.scrapy.pipelines.AzureBlobUploadPipeline': 1}
+        })
+    elif pipeline == 'append':
+        scrapy_settings.update({
+            'ITEM_PIPELINES': {f'themispy.scrapy.pipelines.AzureAppendBlobUploadPipeline': 1}
         })
     elif pipeline == 'download':
         scrapy_settings.update({
