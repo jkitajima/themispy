@@ -4,5 +4,5 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "themispy"
-version = "0.1.8"
+version = "0.1.9"
 readme = "README.md"

@@ -125,7 +125,7 @@ readers.py
 
     :param bool logging_enable: Indica se a função deverá ativar o logger ou não. (Padrão é ``True``.)
 
-    :returns: Lista contendo objetos JSON.
+    :returns: Lista contendo objetos JSON como uma String.
 
 
 

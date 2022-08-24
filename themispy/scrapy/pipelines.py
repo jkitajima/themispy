@@ -41,6 +41,11 @@ class AzureBlobUploadPipeline:
         self.blob_client.upload_blob(data=self.content, overwrite=True)
 
 
+class AzureAppendBlobUploadPipeline(AzureBlobUploadPipeline):
+    def close_spider(self, spider):
+        self.blob_client.upload_blob(data=self.content, blob_type='AppendBlob')
+
+
 class AzureFileDownloaderPipeline(FilesPipeline):
     """
     Custom class created in order to upload downloaded files to
