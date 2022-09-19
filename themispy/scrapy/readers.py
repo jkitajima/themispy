@@ -5,7 +5,8 @@ from azure.storage.blob import BlobClient
 
 def read_jsonlines_blob(url: str, encoding: str = 'UTF-8',
                         logging_enable: bool = True):
-    """Reads jsonlines document from the specified blob.
+    """
+    Reads jsonlines document from the specified blob.
     
     Args:
         url (str): Blob full endpoint URL.
