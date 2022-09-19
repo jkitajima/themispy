@@ -1,10 +1,10 @@
 from themispy.project.utils import (
     split_filepath,
-    get_logpath
+    format_logpath
 )
 
 
 __all__ = [
     "split_filepath",
-    "get_logpath"
+    "format_logpath"
 ]

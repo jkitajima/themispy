@@ -12,7 +12,7 @@ from itemadapter import ItemAdapter
 from scrapy.pipelines.files import FilesPipeline
 from scrapy.utils.misc import md5sum
 
-from themispy.project.utils import get_logpath, split_filepath
+from themispy.project.utils import format_logpath, split_filepath
 
 
 class AzureBlobUploadPipeline:
@@ -72,7 +72,7 @@ class AzureFileDownloaderPipeline(FilesPipeline):
         
         # Naming Settings
         PROJECT_TITLE = os.path.split(
-            os.environ['AZCONTAINER_PATH'].strip(get_logpath()))[-1]
+            os.environ['AZCONTAINER_PATH'].strip(format_logpath()))[-1]
         
         docname, docext = split_filepath(response.url)
         
