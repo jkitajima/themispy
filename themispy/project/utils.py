@@ -33,8 +33,8 @@ def format_logpath(tz: str = 'America/Sao_Paulo') -> str:
         
     Example:
         If today is 14/08/2022 (DD/MM/YYYY), then the function will
-    return ``/2022/08/14``.
+    return ``2022/08/14``.
     
     """
     tz = pytz.timezone(tz)
-    return datetime.datetime.now(tz=tz).strftime('/%Y/%m/%d')
+    return datetime.datetime.now(tz=tz).strftime('%Y/%m/%d')
