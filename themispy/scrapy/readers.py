@@ -23,3 +23,23 @@ def read_jsonlines_blob(url: str, encoding: str = 'UTF-8',
                                            logging_enable=logging_enable)
     
     return blob_client.download_blob().content_as_text(encoding=encoding).splitlines()
+
+
+def read_txt_blob(url: str, encoding: str = 'UTF-8', logging_enable: bool = True) -> list:
+    """
+    Reads blob containing URLs for scraping.
+
+    Args:
+        url (str): Blob full URL.
+        encoding (str): Encoding format for text downloading.
+        logging_enable (bool): To enable logging when downloading blob content.
+
+    Returns:
+        List of URLs.
+
+    """
+    if os.path.splitext(url)[1] != '.txt':
+        raise Exception('Blob must be a txt document (".txt").')
+    
+    with BlobClient.from_blob_url(blob_url=url, logging_enable=logging_enable) as blob_client:
+        return blob_client.download_blob().content_as_text(encoding=encoding).splitlines()
