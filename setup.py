@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='themispy',
-    version='0.2.5',
+    version='0.2.6',
     url='https://pypi.org/project/themispy/',
     project_urls={
         'Documentation': 'https://themispy.readthedocs.io/pt_BR/latest/',

@@ -115,22 +115,9 @@ pipelines.py
 readers.py
 ------------
 
-.. function:: themispy.project.readers.read_jsonlines_blob(url: str, encoding: str = 'UTF-8', logging_enable: bool = True)
+.. function:: themispy.project.readers.list_blob_content(url: str, encoding: str = 'UTF-8', logging_enable: bool = True) -> list[str]
 
-    Lê o documento ``.jsonl`` do blob em questão. Opcionalmente, você pode buscar por um atributo específico.
-
-    :param str url: Caminho completo do blob dentro da Azure. Exemplo: ``https://<nome_do_storage>.blob.core.windows.net/<container>/meu_arquivo.jsonl``.
-
-    :param str encoding: Formato de codificação dos caracteres. (``UTF-8`` é o padrão.)
-
-    :param bool logging_enable: Indica se a função deverá ativar o logger ou não. (Padrão é ``True``.)
-
-    :returns: Lista contendo objetos JSON como uma String.
-
-
-.. function:: themispy.project.readers.read_txt_blob(url: str, encoding: str = 'UTF-8', logging_enable: bool = True)
-
-    Lê o documento ``.txt`` do blob em questão. Opcionalmente, você pode buscar por um atributo específico.
+    Lê o conteúdo do blob em questão, convertendo para lista utilizando as quebras de linhas.
 
     :param str url: Caminho completo do blob dentro da Azure. Exemplo: ``https://<nome_do_storage>.blob.core.windows.net/<container>/meu_arquivo.jsonl``.
 
@@ -138,7 +125,7 @@ readers.py
 
     :param bool logging_enable: Indica se a função deverá ativar o logger ou não. (Padrão é ``True``.)
 
-    :returns: Lista contendo cada linha do txt como uma String.
+    :returns: Conteúdo do blob como lista de strings.
 
 
 
