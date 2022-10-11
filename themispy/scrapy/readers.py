@@ -1,7 +1,7 @@
 from azure.storage.blob import BlobClient
 
 
-def list_blob_content(url: str, encoding: str = 'UTF-8', logging_enable: bool = True) -> list[str]:
+def list_blob_content(url: str, encoding: str = 'UTF-8', logging_enable: bool = True) -> 'list[str]':
     """
     Read all content of a blob and convert to list, splitting at line breaks.
     
